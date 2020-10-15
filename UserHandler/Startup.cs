@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using UserHandler.Db.Settings;
 
 namespace UserHandler
 {
@@ -24,6 +26,12 @@ namespace UserHandler
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<UserDbSettings>(Configuration.GetSection("UsersDatabaseSettings"));
+            services.AddSingleton<IDbSettings>(sp => sp.GetRequiredService<IOptions<UserDbSettings>>().Value);
+
+            UserHandler.Db.Configuration.ServiceConfiguration.ConfigureServices(services);
+            UserHandler.Repository.Configuration.ServieConfiguarion.ConfigureServices(services);
+
             services.AddControllers();
         }
 
