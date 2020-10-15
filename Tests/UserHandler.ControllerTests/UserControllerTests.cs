@@ -71,5 +71,28 @@ namespace UserHandler.ControllerTests
             controller.Post(postValue);
             userRepositoryMock.Received().Create(Arg.Is(postValue));
         }
+
+        [Test]
+        public void PutPositveFlow()
+        {
+            User postValue = new User
+            {
+                Id = 1,
+                UserName = "test"
+            };
+
+            controller.Put(postValue);
+            userRepositoryMock.Received().Update(Arg.Is(postValue));
+        }
+
+        [Test]
+        public void DeletePositiveFlow()
+        {
+            int id = 1;
+
+            controller.Delete(id);
+
+            userRepositoryMock.Received().Remove(Arg.Is(id));
+        }
     }
 }
