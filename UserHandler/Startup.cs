@@ -32,7 +32,7 @@ namespace UserHandler
             UserHandler.Db.Configuration.ServiceConfiguration.ConfigureServices(services);
             UserHandler.Repository.Configuration.ServieConfiguarion.ConfigureServices(services);
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
