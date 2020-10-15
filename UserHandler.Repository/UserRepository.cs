@@ -24,7 +24,8 @@ namespace UserHandler.Repository
 
         public User Create(User entitiy)
         {
-            throw new NotImplementedException();
+            userCollection.Value.InsertOne(entitiy);
+            return entitiy;
         }
 
         public ICollection<User> GetAll()

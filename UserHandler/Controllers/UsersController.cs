@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using UserHandler.Db.Models;
 using UserHandler.Repository;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace UserHandler.Controllers
 {
@@ -18,36 +17,39 @@ namespace UserHandler.Controllers
             this.userRepository = userRepository;
         }
 
-        // GET: api/<UsersController>
+        // GET: api/users
         [HttpGet]
         public IEnumerable<User> Get()
         {
             return userRepository.GetAll();
         }
 
-        // GET api/<UsersController>/5
+        // GET api/users/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public User Get(int id)
         {
-            return "value";
+            return userRepository.GetById(id);
         }
 
-        // POST api/<UsersController>
+        // POST api/users
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] User user)
         {
+            userRepository.Update(user);
         }
 
-        // PUT api/<UsersController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // PUT api/users/5
+        [HttpPut]
+        public void Put([FromBody] User user)
         {
+            userRepository.Create(user);
         }
 
-        // DELETE api/<UsersController>/5
+        // DELETE api/users/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            userRepository.Remove(id);
         }
     }
 }
