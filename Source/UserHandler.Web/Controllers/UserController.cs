@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UserHandler.Db.Models;
 using UserHandler.Repository;
@@ -37,16 +38,16 @@ namespace UserHandler.Web.Controllers
 
         // POST api/users
         [HttpPost]
-        public void Post([FromBody] User user)
+        public User Post([FromBody] User user)
         {
-            userRepository.Update(user);
+            return userRepository.Create(user);
         }
 
         // PUT api/users/5
         [HttpPut]
         public void Put([FromBody] User user)
         {
-            userRepository.Create(user);
+            userRepository.Update(user);
         }
 
         // DELETE api/users/5

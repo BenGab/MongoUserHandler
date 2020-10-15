@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Net.Http;
 using UserHandler.Db;
 using UserHandler.Db.Models;
 using UserHandler.Db.Settings;
@@ -30,7 +31,7 @@ namespace UserHandler.Repository
 
         public ICollection<User> GetAll()
         {
-            return userCollection.Value.Find(user=> true).ToList();
+            return userCollection.Value.Find(user => true).ToList();
         }
 
         public ICollection<User> GetBy(Expression<Func<User, bool>> filter)
