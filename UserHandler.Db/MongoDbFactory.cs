@@ -1,19 +1,23 @@
 ﻿using MongoDB.Driver;
+using System;
+using UserHandler.Db.Settings;
 
 namespace UserHandler.Db
 {
     public class MongoDbFactory : IDbFactory
     {
-        private readonly IMongoClient mongoClient;
+        private readonly Lazy<IMongoClient> mongoClient;
+        private readonly IDbSettings dbSettings;
 
-        public MongoDbFactory(IMongoClient mongoClient)
+        public MongoDbFactory(IDbSettings dbSettings)
         {
-            this.mongoClient = mongoClient;
+            this.mongoClient = new Lazy<IMongoClient>(()=> new MongoClient(dbSettings.ConnectionString));
+            this.dbSettings = dbSettings;
         }
 
-        public IMongoDatabase GetDatabase(string databaseName)
+        public IMongoDatabase GetDatabase()
         {
-            return mongoClient.GetDatabase(databaseName);
+            return mongoClient.Value.GetDatabase(dbSettings.DatabaseName);
         }
     }
 }
