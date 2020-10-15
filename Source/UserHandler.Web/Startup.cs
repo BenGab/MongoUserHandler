@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using UserHandler.Db.Settings;
 
-namespace UserHandler
+namespace UserHandler.Web
 {
     public class Startup
     {
